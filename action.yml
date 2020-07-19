@@ -1,0 +1,26 @@
+name: 'Golang attach release artifacts'
+description: 'Attach go binaries into a github release (tag)'
+author: 'Mike Mylonakis'
+branding:
+  icon: archive
+  color: gray-dark
+inputs:
+  go_files:
+    description: 'Space separated go source files to build'
+    required: true
+  binaries:
+    description: 'Space separated binary file names for the go_files above ( go build -v -o binary go_file ) go_files and binaries must be of the same length'
+    required: true
+  linux_build_variants:
+    required: false
+    description: "GOARCH to use when GOOS = linux. Set to an empty string to disable linux build variants completely"
+    default: '386 amd64 arm arm64'
+  darwin_build_variants:
+    required: false
+    description: "GOARCH to use when GOOS = darwin. Set to an empty string to disable darwin build variants completely."
+    default: "amd64"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+
